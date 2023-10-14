@@ -20,12 +20,14 @@ public class Localidad {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_localidad")
-    int id_localidad;
+    private long id_localidad;
     @Column(name = "localidad")
-    String localidad;
-    
+    private String localidad;
+    private long id_municipio;
+    /*
+    Por lo mientras unicamente se maneja como una columna
     @ManyToOne
     @JoinColumn(name = "id_municipio")
     Municipio municipio;
-
+     */
 }
