@@ -5,10 +5,25 @@
 
 package com.example.crud_shopall.model;
 
+import jakarta.persistence.*;
+import lombok.*;
+
 /**
  * 
  * @author Anthony Gomez Cabañas
  */
-public class Marca {
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@ToString
+@Entity
+@Table
+public class Marca
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id_marca;
+    private String marca;
 }
