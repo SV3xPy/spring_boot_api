@@ -2,6 +2,7 @@ package com.example.crud_shopall.services;
 
 import com.example.crud_shopall.model.UsuarioRol;
 import com.example.crud_shopall.repositories.UsuarioRolRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 public class UsuarioRolService {
     private final UsuarioRolRepository usuarioRolRepository;
 
+    @Autowired
     public UsuarioRolService(UsuarioRolRepository usuarioRolRepository) {
         this.usuarioRolRepository = usuarioRolRepository;
     }
