@@ -1,9 +1,11 @@
 package com.example.crud_shopall.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -11,25 +13,35 @@ import java.util.Date;
 @Setter
 @ToString
 @Entity
-@Table
+@Table(name = "cliente")
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id_cliente;
+
     @Column(name = "id_cliente")
-    private String nombre;
+    private long id_cliente;
+
     @Column(name = "nombre")
-    private String primer_apellido;
+    private String nombre;
+
     @Column(name = "primer_apellido")
-    private String segundo_apellido;
+    private String primer_apellido;
+
     @Column(name = "segundo_apellido")
-    private Date nacimiento;
+    private String segundo_apellido;
+
     @Column(name = "nacimiento")
-    private long id_telefono;
+    private Date nacimiento;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "id_telefono")
-    Telefono telefono;
+    private Telefono telefono;
 
+    /*@OneToMany(targetEntity = Venta.class, fetch = FetchType.LAZY, mappedBy = "cliente")
+    @JsonIgnore
+    private List<Venta> ventas;*/
 
+    @OneToMany(targetEntity = Resenia.class, fetch = FetchType.LAZY, mappedBy = "cliente")
+    @JsonIgnore
+    private List<Resenia> resenias;
 }
