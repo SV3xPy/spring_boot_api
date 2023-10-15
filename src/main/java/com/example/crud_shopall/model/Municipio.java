@@ -10,6 +10,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -28,7 +29,11 @@ public class Municipio {
     private long id_municipio;
     @Column(name = "municipio")
     private String municipio;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "id_estado")
     private Estado estado;
+
+    @OneToMany(targetEntity = Localidad.class, fetch = FetchType.LAZY, mappedBy = "municipio")
+    @JsonIgnore
+    private List<Localidad> localidades;
 }
