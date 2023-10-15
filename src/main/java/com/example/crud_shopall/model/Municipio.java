@@ -21,11 +21,12 @@ public class Municipio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_municipio")
-    int id_municipio;
+    private long id_municipio;
     @Column(name = "municipio")
-    String municipio;
-
-    @ManyToOne
+    private String municipio;
+    private long id_estado;
+    /*@ManyToOne
     @JoinColumn(name = "id_estado")
     Estado estado;
+     */
 }
