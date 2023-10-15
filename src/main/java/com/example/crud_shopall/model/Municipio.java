@@ -4,9 +4,13 @@
  */
 package com.example.crud_shopall.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.Objects;
 
 /**
  *
@@ -24,9 +28,7 @@ public class Municipio {
     private long id_municipio;
     @Column(name = "municipio")
     private String municipio;
-    private long id_estado;
-    /*@ManyToOne
+    @ManyToOne
     @JoinColumn(name = "id_estado")
-    Estado estado;
-     */
+    private Estado estado;
 }

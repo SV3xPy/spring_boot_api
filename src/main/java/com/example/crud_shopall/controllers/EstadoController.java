@@ -26,12 +26,12 @@ public class EstadoController {
     public ResponseEntity<Object> newEstado(@RequestBody Estado estado){
         return this.estadoService.newEstado(estado);
     }
-    @PutMapping(path = "{productId}")
-    public ResponseEntity<Object> updateEstado(@RequestBody Estado estado,@PathVariable("productId") Long id){
+    @PutMapping(path = "{estadoId}")
+    public ResponseEntity<Object> updateEstado(@RequestBody Estado estado,@PathVariable("estadoId") Long id){
         return this.estadoService.updateEstado(estado,id);
     }
-    @DeleteMapping(path="{productId}")
-    public ResponseEntity<Object> deleteEstado(@PathVariable("productId") Long id){
+    @DeleteMapping(path="{estadoId}")
+    public ResponseEntity<Object> deleteEstado(@PathVariable("estadoId") Long id){
         return this.estadoService.deleteEstado(id);
     }
 }
