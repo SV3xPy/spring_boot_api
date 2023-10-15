@@ -5,8 +5,11 @@
 
 package com.example.crud_shopall.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 /**
  * 
@@ -24,6 +27,11 @@ public class Marca
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id_marca;
+    private Long id_marca;
+    @Column(unique = true)
     private String marca;
+
+    @OneToMany(targetEntity = Producto.class, fetch = FetchType.LAZY, mappedBy = "marca")
+    @JsonIgnore
+    private List<Producto> productos;
 }

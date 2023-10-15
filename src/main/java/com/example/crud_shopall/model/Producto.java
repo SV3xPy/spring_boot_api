@@ -13,9 +13,11 @@ public class Producto
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id_producto;
+    private Long id_producto;
     private String producto;
-    private long id_marca;
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "id_marca")
+    private Marca marca;
     private double precio_referencia;
     private double costo_referencia;
     private String descripcion;

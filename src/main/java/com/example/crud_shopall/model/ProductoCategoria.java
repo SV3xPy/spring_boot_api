@@ -9,10 +9,12 @@ import lombok.*;
 @ToString
 @Entity
 @Table (name = "producto_categoria")
-public class ProductoCategoria {
+public class ProductoCategoria
+{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id_producto_categoria;
-    private long id_producto;
-    private long id_categoria;
+    private Long id_producto_categoria;
+
+    private Long id_producto;
+    private Long id_categoria;
 }
