@@ -1,11 +1,11 @@
 package com.example.crud_shopall.controllers;
 
 import com.example.crud_shopall.model.Rol;
+import com.example.crud_shopall.model.Rol;
 import com.example.crud_shopall.services.RolService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,5 +22,18 @@ public class RolController {
     @GetMapping("/all")
     public List<Rol> getRol(){
         return this.rolService.getRol();
+    }
+
+    @PostMapping
+    public ResponseEntity<Object> newRol(@RequestBody Rol rol){
+        return this.rolService.newRol(rol);
+    }
+    @PutMapping(path = "{rolId}")
+    public ResponseEntity<Object> updateRol(@RequestBody Rol rol,@PathVariable("rolId") Long id){
+        return this.rolService.updateRol(rol,id);
+    }
+    @DeleteMapping(path="{rolId}")
+    public ResponseEntity<Object> deleteRol(@PathVariable("rolId") Long id){
+        return this.rolService.deleteRol(id);
     }
 }
