@@ -36,10 +36,32 @@ public class ProductoCategoriaService {
         return this.productoCategoriaRepository.findAll();
     }
 
-    public ResponseEntity<Object> newProductoCategoria(ProductoCategoria productoCategoria)
+    public ResponseEntity<Object> newProductoCategoria(List<ProductoCategoria> productoCategorias/*ProductoCategoria productoCategoria*/)
     {
         datos = new HashMap<>();
-        Optional<Producto> producto = productoRepository.findById(productoCategoria.getId_producto());
+        // Verificar la existencia de los productos y categorías
+        for (ProductoCategoria productoCategoria : productoCategorias) {
+            Optional<Producto> producto = productoRepository.findById(productoCategoria.getProducto().getId_producto());
+            if (!producto.isPresent()) {
+                datos.put("Error:", true);
+                datos.put("Message", "El producto no existe.");
+                return new ResponseEntity<>(datos, HttpStatus.CONFLICT);
+            }
+
+            Optional<Categoria> categoria = categoriaRepository.findById(productoCategoria.getCategoria().getId_categoria());
+            if (!categoria.isPresent()) {
+                datos.put("Error:", true);
+                datos.put("Message", "La categoría no existe.");
+                return new ResponseEntity<>(datos, HttpStatus.CONFLICT);
+            }
+        }
+
+        // Guardar los cambios en la base de datos
+        productoCategoriaRepository.saveAll(productoCategorias);
+
+        datos.put("Message", "Los productos y sus categorías han sido insertados con éxito.");
+        return new ResponseEntity<>(datos, HttpStatus.CREATED);
+        /*Optional<Producto> producto = productoRepository.findById(productoCategoria.getProducto().getId_producto());
         if (producto.isEmpty())
         {
             datos.put("Error:", true);
@@ -50,7 +72,7 @@ public class ProductoCategoriaService {
             );
         }
 
-        Optional<Categoria> categoria = categoriaRepository.findById(productoCategoria.getId_categoria());
+        Optional<Categoria> categoria = categoriaRepository.findById(productoCategoria.getCategoria().getId_categoria());
         if (categoria.isEmpty())
         {
             datos.put("Error:", true);
@@ -67,13 +89,48 @@ public class ProductoCategoriaService {
         return new ResponseEntity<>(
                 datos,
                 HttpStatus.CREATED
-        );
+        );*/
     }
 
-    public ResponseEntity<Object> updateProductoCategoria(ProductoCategoria productoCategoria, Long id)
+    public ResponseEntity<Object> updateProductoCategoria(List<Long> ids, List<ProductoCategoria> productoCategorias, ProductoCategoria productoCategoria)
     {
         datos = new HashMap<>();
-        Optional<ProductoCategoria> res = this.productoCategoriaRepository.findById(id);
+        // Verificar la existencia de los productos y categorías
+        for (ProductoCategoria productosCategorias : productoCategorias) {
+            Optional<Producto> producto = productoRepository.findById(productosCategorias.getProducto().getId_producto());
+            if (producto.isEmpty()) {
+                datos.put("Error:", true);
+                datos.put("Message", "El producto no existe.");
+                return new ResponseEntity<>(datos, HttpStatus.CONFLICT);
+            }
+
+            Optional<Categoria> categoria = categoriaRepository.findById(productosCategorias.getCategoria().getId_categoria());
+            if (categoria.isEmpty()) {
+                datos.put("Error:", true);
+                datos.put("Message", "La categoría no existe.");
+                return new ResponseEntity<>(datos, HttpStatus.CONFLICT);
+            }
+        }
+
+        // Actualizar los registros individualmente
+        for (Long id : ids) {
+            Optional<ProductoCategoria> res = this.productoCategoriaRepository.findById(id);
+            if (res.isEmpty()) {
+                datos.put("Error", true);
+                datos.put("Message", "No existe un registro con ese ID.");
+                return new ResponseEntity<>(datos, HttpStatus.CONFLICT);
+            }
+
+            ProductoCategoria oldProductoCategoria = res.get();
+            oldProductoCategoria.setProducto(productoCategoria.getProducto());
+            oldProductoCategoria.setCategoria(productoCategoria.getCategoria());
+            productoCategoriaRepository.save(oldProductoCategoria);
+        }
+
+        datos.put("Message", "Se han actualizado los registros.");
+        return new ResponseEntity<>(datos, HttpStatus.ACCEPTED);
+
+        /*Optional<ProductoCategoria> res = this.productoCategoriaRepository.findById(id);
         if(res.isEmpty())
         {
             datos.put("Error", true);
@@ -84,7 +141,7 @@ public class ProductoCategoriaService {
             );
         }
 
-        Optional<Producto> producto = productoRepository.findById(productoCategoria.getId_producto());
+        Optional<Producto> producto = productoRepository.findById(productoCategoria.getProducto().getId_producto());
         if (producto.isEmpty())
         {
             datos.put("Error:", true);
@@ -95,7 +152,7 @@ public class ProductoCategoriaService {
             );
         }
 
-        Optional<Categoria> categoria = categoriaRepository.findById(productoCategoria.getId_categoria());
+        Optional<Categoria> categoria = categoriaRepository.findById(productoCategoria.getCategoria().getId_categoria());
         if (categoria.isEmpty())
         {
             datos.put("Error:", true);
@@ -107,15 +164,16 @@ public class ProductoCategoriaService {
         }
 
         ProductoCategoria oldProductoCategoria = res.get();
-        oldProductoCategoria.setId_producto(productoCategoria.getId_producto());
-        oldProductoCategoria.setId_categoria(productoCategoria.getId_categoria());
+        oldProductoCategoria.getProducto(productoCategoria.getId_producto());
+        //oldProductoCategoria.setId_producto(productoCategoria.getId_producto());
+        //oldProductoCategoria.setId_categoria(productoCategoria.getId_categoria());
         productoCategoriaRepository.save(oldProductoCategoria);
         datos.put("Message", "Se ha actualizado el registro.");
         datos.put("Data", oldProductoCategoria);
         return new ResponseEntity<>(
                 datos,
                 HttpStatus.ACCEPTED
-        );
+        );*/
     }
 
     public ResponseEntity<Object> deleteProductoCategoria (Long id)
