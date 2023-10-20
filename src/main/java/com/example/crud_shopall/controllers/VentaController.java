@@ -4,12 +4,13 @@ import com.example.crud_shopall.model.Privilegio;
         import com.example.crud_shopall.model.Venta;
         import com.example.crud_shopall.services.VentaService;
         import org.springframework.beans.factory.annotation.Autowired;
-        import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
         import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/telefono")
+@RequestMapping("api/v1/venta")
 public class VentaController {
     private final VentaService ventaService;
 
@@ -23,18 +24,19 @@ public class VentaController {
         return this.ventaService.getVenta();
     }
 
-    @PostMapping("/add")
-    public Venta addVenta(@RequestBody Venta venta){
-        return this.ventaService.setVenta(venta);
+    @PostMapping
+    public ResponseEntity<Object> addVenta(@RequestBody Venta venta){
+
+        return this.ventaService.addVenta(venta);
     }
 
-    @PutMapping("/update")
-    public Venta updateVenta(@RequestBody Venta venta){
-        return this.ventaService.setVenta(venta);
+    @PutMapping(path = "{ventaId}")
+    public ResponseEntity<Object> updateVenta(@RequestBody Venta venta,  @PathVariable("ventaId") Long id){
+        return this.ventaService.updateVenta(venta, id);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public void deleteVenta(@PathVariable("id") Long id){
-        this.ventaService.deleteVenta(id);
+    @DeleteMapping(path = "{ventaId}")
+    public ResponseEntity<Object> deleteVenta( @PathVariable("ventaId") Long id){
+        return this.ventaService.deleteVenta(id);
     }
 }

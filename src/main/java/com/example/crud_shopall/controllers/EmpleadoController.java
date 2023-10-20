@@ -1,16 +1,17 @@
 package com.example.crud_shopall.controllers;
 
 import com.example.crud_shopall.model.Privilegio;
-        import com.example.crud_shopall.model.Empleado;
+import com.example.crud_shopall.model.Empleado;
 import com.example.crud_shopall.model.Tipo_pago;
 import com.example.crud_shopall.services.EmpleadoService;
-        import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/telefono")
+@RequestMapping("api/v1/empleado")
 public class EmpleadoController {
     private final EmpleadoService empleadoService;
 
@@ -24,18 +25,18 @@ public class EmpleadoController {
         return this.empleadoService.getEmpleado();
     }
 
-    @PostMapping("/add")
-    public Empleado addEmpleado(@RequestBody Empleado empleado){
-        return this.empleadoService.setEmpleado(empleado);
+    @PostMapping
+    public ResponseEntity<Object> addEmpleado(@RequestBody Empleado empleado){
+        return this.empleadoService.addEmpleado(empleado);
     }
 
-    @PutMapping("/update")
-    public Empleado updateEmpleado(@RequestBody Empleado empleado){
-        return this.empleadoService.setEmpleado(empleado);
+    @PutMapping(path = "{empleadoId}")
+    public ResponseEntity<Object> updateEmpleado(@RequestBody Empleado empleado, @PathVariable("empleadoId") Long id){
+        return this.empleadoService.updateEmpleado(empleado, id);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public void deleteEmpleado(@PathVariable("id") Long id){
-        this.empleadoService.deleteEmpleado(id);
+    @DeleteMapping(path = "{empleadoId}")
+    public ResponseEntity<Object> deleteEmpleado(@PathVariable("empleadoId") Long id){
+        return this.empleadoService.deleteEmpleado(id);
     }
 }
