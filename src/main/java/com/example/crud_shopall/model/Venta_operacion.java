@@ -1,7 +1,7 @@
 package com.example.crud_shopall.model;
 
 import jakarta.persistence.*;
-        import lombok.*;
+import lombok.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,8 +14,15 @@ public class Venta_operacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id_venta_operacion;
-    private long id_venta;
-    private long id_tipo_pago;
+
+    @ManyToOne
+    @JoinColumn(name = "id_venta")
+    private Venta venta;
+
+    @ManyToOne
+    @JoinColumn(name = "id_tipo_pago")
+    private Tipo_pago tipo_pago;
+
     private String folio;
     private float monto;
     private byte autorizado;

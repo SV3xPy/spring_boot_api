@@ -1,7 +1,7 @@
 package com.example.crud_shopall.model;
 
 import jakarta.persistence.*;
-        import lombok.*;
+import lombok.*;
 
 import java.util.Date;
 
@@ -16,9 +16,22 @@ public class Venta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id_venta;
-    private long id_tienda;
-    private long id_empleado;
-    private long id_cliente;
+
+    @ManyToOne
+    @JoinColumn(name = "id_tienda")
+    private Tienda tienda;
+
+    @ManyToOne
+    @JoinColumn(name = "id_empleado")
+    private Empleado empleado;
+
+    @ManyToOne
+    @JoinColumn(name = "id_cliente")
+    private Cliente cliente;
+
     private Date fecha;
-    private long id_venta_status;
+
+    @ManyToOne
+    @JoinColumn(name = "id_venta_status")
+    private Venta_status venta_status;
 }

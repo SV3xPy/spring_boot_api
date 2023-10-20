@@ -1,7 +1,7 @@
 package com.example.crud_shopall.model;
 
 import jakarta.persistence.*;
-        import lombok.*;
+import lombok.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,8 +20,20 @@ public class Empleado {
     private String rfc;
     private String nacimiento;
     private String curp;
-    private long id_telefono;
-    private long id_usuario;
-    private long id_sexo;
-    private long id_tienda;
+
+    @ManyToOne
+    @JoinColumn(name = "id_telefono")
+    private Telefono telefono;
+
+    @ManyToOne
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuario;
+
+    @ManyToOne
+    @JoinColumn(name = "id_sexo")
+    private Sexo sexo;
+
+    @ManyToOne
+    @JoinColumn(name = "id_tienda")
+    private Tienda tienda;
 }
