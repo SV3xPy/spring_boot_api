@@ -4,13 +4,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @ToString
 @Entity
-@Table(name = "resenia")
+@Table(name = "venta_status")
 public class VentaStatus {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +22,7 @@ public class VentaStatus {
     @Column(name = "venta_status")
     private String venta_status;
 
-    @OneToMany(targetEntity = Venta.class, fetch = FetchType.LAZY, mappedBy = "ventastatus")
+    @OneToMany(targetEntity = Venta.class, fetch = FetchType.LAZY, mappedBy = "venta_status")
     @JsonIgnore
     private List<Venta> ventas;
 }

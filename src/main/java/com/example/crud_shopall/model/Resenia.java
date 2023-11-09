@@ -33,7 +33,7 @@ public class Resenia {
     @JoinColumn(name = "id_producto")
     Producto producto;
 
-    @OneToMany(targetEntity = VentaDetalle.class, fetch = FetchType.LAZY, mappedBy = "ventadetalle")
+    @OneToMany(targetEntity = VentaDetalle.class, fetch = FetchType.LAZY, mappedBy = "resenia")
     @JsonIgnore
-    private List<VentaDetalle> ventadetalles;
+    private List<VentaDetalle> venta_detalle;
 }
