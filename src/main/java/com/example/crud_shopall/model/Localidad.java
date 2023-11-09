@@ -4,9 +4,12 @@
  */
 
 package com.example.crud_shopall.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 /**
  * 
@@ -23,11 +26,10 @@ public class Localidad {
     private long id_localidad;
     @Column(name = "localidad")
     private String localidad;
-    private long id_municipio;
-    /*
-    Por lo mientras unicamente se maneja como una columna
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "id_municipio")
-    Municipio municipio;
-     */
+    private Municipio municipio;
+    @OneToMany(targetEntity = Tienda.class, fetch = FetchType.LAZY, mappedBy = "localidad")
+    @JsonIgnore
+    private List<Tienda> tiendas;
 }

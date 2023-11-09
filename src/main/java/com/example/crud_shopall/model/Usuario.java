@@ -1,7 +1,10 @@
 package com.example.crud_shopall.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,4 +21,8 @@ public class Usuario {
     private String correo;
     private String contrasena;
     private String token;
+
+    @OneToMany(targetEntity = UsuarioRol.class, fetch = FetchType.LAZY, mappedBy = "usuario")
+    @JsonIgnore
+    private List<UsuarioRol> usuarioRols;
 }
