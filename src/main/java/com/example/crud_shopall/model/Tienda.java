@@ -23,7 +23,7 @@ public class Tienda {
     private long id_tienda;
     @Column(name = "tienda")
     private String tienda;
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne()
     @JoinColumn(name = "id_localidad")
     private Localidad localidad;
 }

@@ -26,7 +26,7 @@ public class Localidad {
     private long id_localidad;
     @Column(name = "localidad")
     private String localidad;
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne()
     @JoinColumn(name = "id_municipio")
     private Municipio municipio;
     @OneToMany(targetEntity = Tienda.class, fetch = FetchType.LAZY, mappedBy = "localidad")
