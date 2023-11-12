@@ -37,4 +37,9 @@ public class UsuarioController {
     public ResponseEntity<Object> deleteUsuario(@PathVariable("usuarioId") Long id){
         return this.usuarioService.deleteUsuario(id);
     }
+
+    @GetMapping("/{usuarioId}/roles")
+    public ResponseEntity<Object> getUsuarioRoles(@PathVariable("usuarioId") Long id){
+        return this.usuarioService.getUsuarioRoles(id);
+    }
 }

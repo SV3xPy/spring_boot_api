@@ -9,7 +9,9 @@ import java.util.List;
 
 @Service
 public class TiendaService {
-    private final TiendaRepository tiendaRepository;
+    //private final TiendaRepository tiendaRepository;
+    @Autowired
+    private TiendaRepository tiendaRepository;
 
     @Autowired
     public TiendaService(TiendaRepository tiendaRepository){this.tiendaRepository = tiendaRepository;}

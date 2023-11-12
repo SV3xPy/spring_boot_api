@@ -1,5 +1,6 @@
 package com.example.crud_shopall.services;
 
+import com.example.crud_shopall.model.Rol;
 import com.example.crud_shopall.model.Usuario;
 import com.example.crud_shopall.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,4 +83,24 @@ public class UsuarioService {
                 HttpStatus.ACCEPTED
         );
     }
+
+    public ResponseEntity<Object> getUsuarioRoles(Long id){
+        datos = new HashMap<>();
+        boolean exists=this.usuarioRepository.existsById(id);
+        if(!exists){
+            datos.put("error",true);
+            datos.put("message","No existe un usuario con ese ID");
+            return new ResponseEntity<>(
+                    datos,
+                    HttpStatus.CONFLICT
+            );
+        } else {
+            List<Rol> rolesDeUsuario = usuarioRepository.findRolesByUsuarioId(id);
+            return new ResponseEntity<>(
+                    rolesDeUsuario,
+                    HttpStatus.ACCEPTED
+            );
+        }
+    }
+
 }
