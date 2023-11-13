@@ -1,4 +1,5 @@
 package com.example.crud_shopall.model;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,10 +10,21 @@ import lombok.*;
 @ToString
 @Entity
 @Table (name = "producto_categoria")
-public class ProductoCategoria {
+public class ProductoCategoria
+{
     @Id
+
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id_producto_categoria;
-    private long id_producto;
-    private long id_categoria;
+    private Long id_producto_categoria;
+
+    @ManyToOne
+    @JoinColumn(name = "id_producto")
+    @JsonProperty("producto")
+    private Producto producto;
+
+    @ManyToOne
+    @JoinColumn(name = "id_categoria")
+    @JsonProperty("categoria")
+    private Categoria categoria;
 }

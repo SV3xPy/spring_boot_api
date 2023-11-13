@@ -20,10 +20,10 @@ public class Tienda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_tienda")
-    int id_tienda;
+    private long id_tienda;
     @Column(name = "tienda")
-    String tienda;
-    @ManyToOne
+    private String tienda;
+    @ManyToOne()
     @JoinColumn(name = "id_localidad")
-    Localidad localidad;
+    private Localidad localidad;
 }

@@ -15,5 +15,8 @@ public class Telefono {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id_telefono;
     private String telefono;
-    private long id_lada;
+
+    @ManyToOne
+    @JoinColumn(name = "id_lada")
+    private Lada lada;
 }

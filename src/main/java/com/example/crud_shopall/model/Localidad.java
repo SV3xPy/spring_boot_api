@@ -4,9 +4,12 @@
  */
 
 package com.example.crud_shopall.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 /**
  * 
@@ -20,12 +23,13 @@ public class Localidad {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_localidad")
-    int id_localidad;
+    private long id_localidad;
     @Column(name = "localidad")
-    String localidad;
-    
-    @ManyToOne
+    private String localidad;
+    @ManyToOne()
     @JoinColumn(name = "id_municipio")
-    Municipio municipio;
-
+    private Municipio municipio;
+    @OneToMany(targetEntity = Tienda.class, fetch = FetchType.LAZY, mappedBy = "localidad")
+    @JsonIgnore
+    private List<Tienda> tiendas;
 }
