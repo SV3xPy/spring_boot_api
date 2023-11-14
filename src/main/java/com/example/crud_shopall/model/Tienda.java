@@ -23,11 +23,7 @@ public class Tienda {
     private long id_tienda;
     @Column(name = "tienda")
     private String tienda;
-    private long id_localidad;
-
-    /*@ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "id_localidad")
-    Localidad localidad;
-
-     */
+    private Localidad localidad;
 }

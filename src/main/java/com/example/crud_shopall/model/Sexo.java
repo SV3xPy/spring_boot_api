@@ -20,11 +20,10 @@ public class Sexo {
     private String sexo;
 
     //HABILITAR ESTA SECCIÓN HASTA QUE SE AÑADAN LOS MODELOS DE EMPLEADO Y CLIENTE
-    /*@OneToMany(targetEntity = Empleado.class, fetch = FetchType.LAZY, mappedBy = "sexo")
+    @OneToMany(targetEntity = Empleado.class, fetch = FetchType.LAZY, mappedBy = "sexo")
     @JsonIgnore
     private List<Empleado> Empleado;
-
     @OneToMany(targetEntity = Cliente.class, fetch = FetchType.LAZY, mappedBy = "sexo")
     @JsonIgnore
-    private List<Cliente> Cliente;*/
+    private List<Cliente> Cliente;
 }
