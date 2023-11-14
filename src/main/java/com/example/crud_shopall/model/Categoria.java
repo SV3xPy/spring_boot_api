@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -21,6 +22,6 @@ public class Categoria
     private String categoria;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "categoria")
-    private Set<ProductoCategoria> productoCategorias = new HashSet<>();
+    @OneToMany(targetEntity = ProductoCategoria.class, fetch = FetchType.LAZY, mappedBy = "categoria", cascade = CascadeType.REMOVE)
+    private List<ProductoCategoria> productoCategoria;
 }

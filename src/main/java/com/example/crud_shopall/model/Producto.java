@@ -3,6 +3,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
 
@@ -27,6 +28,6 @@ public class Producto
     private String descripcion;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "producto")
-    private Set<ProductoCategoria> productoCategorias = new HashSet<>();
+    @OneToMany(targetEntity = ProductoCategoria.class, fetch = FetchType.LAZY, mappedBy = "producto", cascade = CascadeType.REMOVE)
+    private List<ProductoCategoria> productoCategoria;
 }

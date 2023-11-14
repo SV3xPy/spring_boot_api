@@ -32,10 +32,10 @@ public class ProductoService {
 
     public ResponseEntity<Object> newProducto(Producto producto)
     {
-        Optional<Producto> res = productoRepository.findProductoByProducto(producto.getProducto());
+        //Optional<Producto> res = productoRepository.findProductoByProducto(producto.getProducto());
         datos = new HashMap<>();
 
-        if (res.isPresent())
+        /*if (res.isPresent())
         {
             datos.put("Error:", true);
             datos.put("Message", "Ya existe ese producto.");
@@ -53,7 +53,7 @@ public class ProductoService {
                     datos,
                     HttpStatus.CONFLICT
             );
-        }
+        }*/
 
         productoRepository.save(producto);
         datos.put("Data", producto);
@@ -78,7 +78,7 @@ public class ProductoService {
             );
         }
 
-        Optional<Marca> marca = marcaRepository.findById(producto.getMarca().getId_marca());
+        /*Optional<Marca> marca = marcaRepository.findById(producto.getMarca().getId_marca());
         if (marca.isEmpty()) {
             datos.put("Error:", true);
             datos.put("Message", "La marca no existe.");
@@ -86,7 +86,7 @@ public class ProductoService {
                     datos,
                     HttpStatus.CONFLICT
             );
-        }
+        }*/
 
         Producto oldProducto = res.get();
         oldProducto.setProducto(producto.getProducto());
