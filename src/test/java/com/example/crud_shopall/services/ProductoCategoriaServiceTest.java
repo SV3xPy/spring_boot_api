@@ -66,8 +66,7 @@ class ProductoCategoriaServiceTest {
         // Simula la respuesta del repositorio con la lista ficticia
         List<ProductoCategoria> productoCategoriaList = Arrays.asList(
                 new ProductoCategoria(1L, producto1, categoria1),
-                new ProductoCategoria(2L, producto2, categoria2),
-                new ProductoCategoria(3L, producto3, categoria3)
+                new ProductoCategoria(2L, producto2, categoria2), new ProductoCategoria(3L, producto3, categoria3)
         );
 
         // Simula el comportamiento del repositorio
