@@ -24,5 +24,6 @@ public class VentaOperacion {
 
     private String folio;
     private float monto;
+    //quiza es mejor cambiarlo a boolean
     private byte autorizado;
 }
