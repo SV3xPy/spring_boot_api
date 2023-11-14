@@ -32,11 +32,19 @@ public class Cliente {
 
     @Column(name = "nacimiento")
     private Date nacimiento;
+    @Column(name="curp")
+    private String curp;
 
     @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "id_telefono")
     private Telefono telefono;
 
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name="id_sexo")
+    private Sexo sexo;
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name="id_usuario")
+    private Usuario usuario;
     /*@OneToMany(targetEntity = Venta.class, fetch = FetchType.LAZY, mappedBy = "cliente")
     @JsonIgnore
     private List<Venta> ventas;*/

@@ -25,4 +25,10 @@ public class Usuario {
     @OneToMany(targetEntity = UsuarioRol.class, fetch = FetchType.LAZY, mappedBy = "usuario")
     @JsonIgnore
     private List<UsuarioRol> usuarioRols;
+    @OneToMany(targetEntity = Cliente.class,fetch = FetchType.LAZY,mappedBy = "usuario")
+    @JsonIgnore
+    private List<Cliente> clientes;
+    @OneToMany(targetEntity = Empleado.class,fetch = FetchType.LAZY,mappedBy = "usuario")
+    @JsonIgnore
+    private List<Usuario> usuarios;
 }
