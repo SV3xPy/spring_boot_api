@@ -16,7 +16,7 @@ public class TipoPagoController {
         this.tpService = tpService;
     }
 
-    @GetMapping("/all")
+    @GetMapping()
     public List<TipoPago> getTipo_pago(){
         return this.tpService.getTipoPago();
     }
