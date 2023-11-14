@@ -13,18 +13,16 @@ import lombok.*;
 public class ProductoCategoria
 {
     @Id
-
-
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_producto_categoria;
 
     @ManyToOne
     @JoinColumn(name = "id_producto")
-    @JsonProperty("producto")
+    //@JsonProperty("producto")
     private Producto producto;
 
     @ManyToOne
     @JoinColumn(name = "id_categoria")
-    @JsonProperty("categoria")
+    //@JsonProperty("categoria")
     private Categoria categoria;
 }

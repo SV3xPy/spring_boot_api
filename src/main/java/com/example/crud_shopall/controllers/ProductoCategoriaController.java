@@ -27,15 +27,15 @@ public class ProductoCategoriaController
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Object> registrarProductoCategoria (@RequestBody List<ProductoCategoria> productoCategorias)
+    public ResponseEntity<Object> registrarProductoCategoria (@RequestBody ProductoCategoria productoCategoria)
     {
-        return this.productoCategoriaService.newProductoCategoria(productoCategorias);
+        return this.productoCategoriaService.newProductoCategoria(productoCategoria);
     }
 
     @PutMapping("/update/{productoCategoriaID}")
-    public ResponseEntity <Object> actualizarProductoCategoria(@PathVariable("productoCategoriaID") Long id, @RequestBody List<Long> ids, @RequestBody List<ProductoCategoria> productoCategorias, @RequestBody ProductoCategoria productoCategoria)
+    public ResponseEntity <Object> actualizarProductoCategoria(@PathVariable("productoCategoriaID") Long id, @RequestBody ProductoCategoria productoCategoria)
     {
-        return this.productoCategoriaService.updateProductoCategoria(ids, productoCategorias, productoCategoria);
+        return this.productoCategoriaService.updateProductoCategoria(productoCategoria, id);
     }
 
     @DeleteMapping("/delete/{productoCategoriaID}")
