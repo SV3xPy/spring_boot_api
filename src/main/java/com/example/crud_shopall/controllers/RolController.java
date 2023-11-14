@@ -5,6 +5,7 @@ import com.example.crud_shopall.model.Rol;
 import com.example.crud_shopall.services.RolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,10 +29,12 @@ public class RolController {
     public ResponseEntity<Object> newRol(@RequestBody Rol rol){
         return this.rolService.newRol(rol);
     }
+
     @PutMapping(path = "{rolId}")
     public ResponseEntity<Object> updateRol(@RequestBody Rol rol,@PathVariable("rolId") Long id){
         return this.rolService.updateRol(rol,id);
     }
+
     @DeleteMapping(path="{rolId}")
     public ResponseEntity<Object> deleteRol(@PathVariable("rolId") Long id){
         return this.rolService.deleteRol(id);
