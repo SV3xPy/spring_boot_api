@@ -1,7 +1,5 @@
 package com.example.crud_shopall.services;
 
-import com.example.crud_shopall.model.Categoria;
-import com.example.crud_shopall.model.VentaStatus;
 import com.example.crud_shopall.model.VentaStatus;
 import com.example.crud_shopall.repositories.VentaStatusRepository;
 import org.junit.jupiter.api.BeforeEach;
