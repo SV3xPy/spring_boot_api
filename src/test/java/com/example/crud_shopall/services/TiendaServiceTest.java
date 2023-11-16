@@ -1,3 +1,8 @@
+package com.example.crud_shopall.services;
+
+import com.example.crud_shopall.model.Tienda;
+import com.example.crud_shopall.repositories.TiendaRepository;
+import com.example.crud_shopall.services.TiendaService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

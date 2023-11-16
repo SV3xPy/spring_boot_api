@@ -1,5 +1,6 @@
 package com.example.crud_shopall.services;
 
+import com.example.crud_shopall.model.Rol;
 import com.example.crud_shopall.model.Usuario;
 import com.example.crud_shopall.repositories.UsuarioRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -80,5 +81,18 @@ class UsuarioServiceTest {
         assertEquals(HttpStatus.ACCEPTED,response.getStatusCode());
         //Verificar que el metodo save se llamo adeuadamente
         verify(usuarioRepository,times(1)).save(usuario);
+    }
+
+    @Test
+    void getUsuarioRoles(){
+        when(usuarioRepository.existsById(1L)).thenReturn(true);
+        List<Rol> rolesDeUsuario = Arrays.asList(new Rol());
+        when(usuarioRepository.findRolesByUsuarioId(1L)).thenReturn(rolesDeUsuario);
+        ResponseEntity<Object> result = usuarioService.getUsuarioRoles(1L);
+        assertNotNull(result);
+        assertEquals(HttpStatus.ACCEPTED,result.getStatusCode());
+        assertEquals(rolesDeUsuario,result.getBody());
+        verify(usuarioRepository,times(1)).existsById(1L);
+        verify(usuarioRepository,times(1)).findRolesByUsuarioId(1L);
     }
 }
