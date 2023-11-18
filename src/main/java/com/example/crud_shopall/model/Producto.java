@@ -30,4 +30,7 @@ public class Producto
     @JsonIgnore
     @OneToMany(targetEntity = ProductoCategoria.class, fetch = FetchType.LAZY, mappedBy = "producto", cascade = CascadeType.REMOVE)
     private List<ProductoCategoria> productoCategoria;
+    @JsonIgnore
+    @OneToMany(targetEntity = TiendaProducto.class, fetch = FetchType.LAZY, mappedBy = "producto", cascade = CascadeType.REMOVE)
+    private List<TiendaProducto> tiendaProducto;
 }

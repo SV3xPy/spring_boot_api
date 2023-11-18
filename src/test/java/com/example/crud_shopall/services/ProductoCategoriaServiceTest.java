@@ -45,9 +45,9 @@ class ProductoCategoriaServiceTest {
         categoria2 = new Categoria(2L, "Categoria2", null);
         categoria3 = new Categoria(3L, "Categoria3", null);
 
-        producto1 = new Producto(1L, "Producto1", null, 10.0, 5.0, "Descripción1", null);
-        producto2 = new Producto(2L, "Producto2", null, 15.0, 8.0, "Descripción2", null);
-        producto3 = new Producto(3L, "Producto3", null, 20.0, 12.0, "Descripción3", null);
+        producto1 = new Producto(1L, "Producto1", null, 10.0, 5.0, "Descripción1", null,null);
+        producto2 = new Producto(2L, "Producto2", null, 15.0, 8.0, "Descripción2", null,null);
+        producto3 = new Producto(3L, "Producto3", null, 20.0, 12.0, "Descripción3", null,null);
 
         categoria1.setProductoCategoria(Arrays.asList(new ProductoCategoria(1L, producto1, categoria1)));
         categoria2.setProductoCategoria(Arrays.asList(new ProductoCategoria(2L, producto2, categoria2)));

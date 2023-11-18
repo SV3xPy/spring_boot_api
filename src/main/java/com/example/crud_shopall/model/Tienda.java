@@ -4,14 +4,22 @@
  */
 package com.example.crud_shopall.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 /**
  *
  * @author Anthony Gomez Cabañas
  */
+
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -26,4 +34,7 @@ public class Tienda {
     @ManyToOne()
     @JoinColumn(name = "id_localidad")
     private Localidad localidad;
+    @JsonIgnore
+    @OneToMany(targetEntity = TiendaProducto.class, fetch = FetchType.LAZY, mappedBy = "tienda", cascade = CascadeType.REMOVE)
+    private List<TiendaProducto> tiendaProducto;
 }
