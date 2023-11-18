@@ -3,6 +3,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.access.expression.SecurityExpressionHandler;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -39,10 +40,16 @@ public class WebSecurityConfig {
                 .authorizeRequests()
                 .requestMatchers("/api/v1/auth/**", "/v3/api-docs/**", "/v3/api-docs.yaml", "/swagger-ui/**", "/swagger-ui.html")
                 .permitAll()
-                .requestMatchers("/api/v1/estado", "/api/v1/municipio", "/api/v1/localidad").hasAnyRole("Vendedor", "Comprador")
-                .requestMatchers("/api/v1/tienda/**", "/api/v1/producto/**").hasRole("Vendedor")
-                .requestMatchers("/api/v1/categoria/all").hasAnyRole("Vendedor", "Comprador")
-                .requestMatchers("/api/v1/marca/all").hasAnyRole("Vendedor", "Comprador")
+                .requestMatchers(HttpMethod.GET, "/api/v1/estado", "/api/v1/municipio", "/api/v1/localidad").hasAnyRole("Vendedor", "Comprador")
+                .requestMatchers(HttpMethod.GET, "/api/v1/tipo_pago", "/api/v1/lada/all", "/api/v1/sexo/all").hasAnyRole("Vendedor", "Comprador")
+                .requestMatchers(HttpMethod.GET, "/api/v1/categoria/all", "/api/v1/marca/all").hasAnyRole("Vendedor", "Comprador")
+                .requestMatchers(HttpMethod.GET, "/api/v1/venta_operacion/all", "/api/v1/ventadetalle", "/api/v1/ventastatus").hasAnyRole("Vendedor", "Comprador")
+                .requestMatchers(HttpMethod.GET, "/api/v1/producto/all", "/api/v1/tienda").hasRole("Comprador")
+                .requestMatchers(HttpMethod.GET,"/api/v1/resenia").hasRole("Vendedor")
+                .requestMatchers("/api/v1/telefono/**", "/api/v1/venta/**").hasAnyRole("Vendedor", "Comprador")
+                .requestMatchers("/api/v1/tienda/**", "/api/v1/producto/**", "/api/v1/productoCategoria/**").hasRole("Vendedor")
+                .requestMatchers("/api/v1/empleado/**").hasRole("Vendedor")
+                .requestMatchers("/api/v1/cliente/**", "/api/v1/resenia/**").hasRole("Comprador")
                 .requestMatchers("/api/v1/**").hasRole("Administrador")
                 .anyRequest()
                 .authenticated()
